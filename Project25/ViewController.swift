@@ -109,6 +109,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
+    func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
+        if let image = UIImage(data: data) {
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                self.images.insert(image, atIndex: 0)
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
     func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {
         
     }
