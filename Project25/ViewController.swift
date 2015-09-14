@@ -88,6 +88,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         presentViewController(mcBrowser, animated: true, completion: nil)
     }
     
+    func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {
         
     }
