@@ -63,6 +63,23 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         images.insert(newImage, atIndex: 0)
         collectionView.reloadData()
+        
+        // 1
+        if mcSession.connectedPeers.count > 0 {
+            // 2
+            let imageData = UIImagePNGRepresentation(newImage)
+            
+            // 3
+            var error: NSError?
+            mcSession.sendData(imageData, toPeers: mcSession.connectedPeers, withMode: .Reliable, error: &error)
+            
+            // 4
+            if error != nil {
+                let ac = UIAlertController(title: "Send error", message: error!.localizedDescription, preferredStyle: .Alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                presentViewController(ac, animated: true, completion: nil)
+            }
+        }
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
