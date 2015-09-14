@@ -96,6 +96,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
+        switch state {
+        case MCSessionState.Connected:
+            println("Connected: \(peerID.displayName)")
+            
+        case MCSessionState.Connecting:
+            println("Connecting: \(peerID.displayName)")
+            
+        case MCSessionState.NotConnected:
+            println("Not Connected: \(peerID.displayName)")
+        }
+    }
+    
     func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {
         
     }
